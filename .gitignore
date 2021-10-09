@@ -86,6 +86,7 @@ local_settings.py
 ### IDE ###
 .idea
 
+.run
 .env
 db.sqlite3
 bad_req.txt
