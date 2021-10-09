@@ -4,7 +4,6 @@ from pathlib import Path
 import dj_database_url
 import django_heroku
 import dotenv
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.contrib import staticfiles
 
@@ -24,6 +23,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'moretech-hack.herokuapp.com']
 
+AUTH_USER_MODEL = 'authentication.Admin'
+AUTHENTICATION_BACKENDS = [
+    'authentication.backends.EmailAuthBackend',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     'knox',
 
     'api.apps.ApiConfig',
+    'authentication.apps.AuthenticationConfig',
 ]
 
 # REST_FRAMEWORK
@@ -172,6 +177,6 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:9000'
 ]
 
-# django_heroku.settings(locals())
-# if os.environ.get('ENV') == 'development':
-#     del DATABASES['default']['OPTIONS']['sslmode']
+django_heroku.settings(locals())
+if os.environ.get('ENV') == 'development':
+    del DATABASES['default']['OPTIONS']['sslmode']
